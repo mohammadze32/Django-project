@@ -1,5 +1,10 @@
 from django.contrib.auth.models import User
 from django.db import models
+
+all_users = User.objects.values()
+print(all_users)
+print(all_users[0]['username'])
+
 class Catagory(models.Model):
     name = models.CharField(max_length=255)
     class Meta:
