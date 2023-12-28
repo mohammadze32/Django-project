@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'item',
-    'apm'
 ]#we add core to basic config
 
 MIDDLEWARE = [
