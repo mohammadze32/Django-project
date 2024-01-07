@@ -8,7 +8,7 @@
     <div class="grid grid-cols-3 gap-3">
         {%for item in items%}
         <div>
-             <a href="#">
+             <a href="{% url 'item:detail' item.id %}">
                 <div>
                     <img src = "{{item.image}}" class="rounded-t-xl">
                     <h2 class="text-2xl">{{item.name}}</h2>

@@ -8,7 +8,7 @@ def index(request):
 
     return render(request , 'core/index.html' , {
         'catagories' : catagories  ,
-        'items' : items ,
+        'item' : items ,
     })
 def contact(request):
     return render(request , 'core/contact.html')
