@@ -1,0 +1,16 @@
+name ke toye urlpatten mizarim kmak mikone ke badan to projecet rahat estefade konim 
+flex : item ha pish ham bashe 
+justify : beyne logo va link fasle dashe bashe 
+items-cnter item ham rade ye link bashe 
+
+to ye div space-x-6 gozasht ke khodkar fasele mizare  age 
+hover age rosh begeri rangesh avaz mishe 
+bg-teal background ast  k teal siah mishe 
+w-2/3 mibare 2 ta bala 3 rast 
+ordering = ('name',) tupple baes mishe iterable beshe 
+ma omadim ba estefade az import user haro baraye jadval catagory created taerif kardim 
+pillow baraye handel kardan image lazame 
+ma base media folder tarif mikonim kenare static 
+django baraye renedr kardan image moshkele dare ke ma as ye rahe tricky estefade mikonim 
+include toye url chist
+tage strong 
