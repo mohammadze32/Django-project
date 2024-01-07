@@ -1,16 +1,32 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
 from item.models import Catagory , item
 
-def index(request):
-    items = item.objects.filter(is_sold=False)[0:3]
-    print(items)
-    catagories = Catagory.objects.all()
+from .forms import SignupForm
 
-    return render(request , 'core/index.html' , {
-        'catagories' : catagories  ,
-        'items' : items ,
+def index(request):
+    items = item.objects.filter(is_sold=False)[0:6]
+    categories = Catagory.objects.all()
+
+    return render(request, 'core/index.html', {
+        'categories': categories,
+        'items': items,
     })
+
 def contact(request):
-    return render(request , 'core/contact.html')
-def term(request):
-    return render(request , 'core/term.html')
+    return render(request, 'core/contact.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect('/login/')
+    else:
+        form = SignupForm()
+
+    return render(request, 'core/signup.html', {
+        'form': form
+    })
