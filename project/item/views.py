@@ -2,17 +2,17 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .forms import NewItemForm, EditItemForm
+from .forms import NewItemForm, EditItemForm , OrderForm
 from .models import Catagory, item as Item
 
 def items(request):
     query = request.GET.get('query', '')
     category_id = request.GET.get('category', 0)
-    categories = Category.objects.all()
+    categories = Catagory.objects.all()
     items = Item.objects.filter(is_sold=False)
 
     if category_id:
-        items = items.filter(category_id=category_id)
+        items = items.filter(catagory=category_id)
 
     if query:
         items = items.filter(Q(name__icontains=query) | Q(description__icontains=query))
@@ -26,11 +26,19 @@ def items(request):
 
 def detail(request, pk):
     item = get_object_or_404(Item, pk=pk)
-    related_items = Item.objects.filter(catagory=item.catagory, is_sold=False).exclude(pk=pk)[0:3]
+    if request.method == 'POST':
+        print(item.catagory)
+        form = OrderForm(request.POST)
+        item1 = form.save()
+        return redirect('/')
+    print(item.catagory)
 
+    #related_items = Item.objects.filter(catagory = item.catagory).exclude(pk=pk)[0:3]
+    form = OrderForm()
     return render(request, 'item/detail.html', {
+        'form' : form ,
         'item': item,
-        'related_items': related_items
+        'related_items': None
     })
 
 @login_required
@@ -42,6 +50,7 @@ def new(request):
             item = form.save(commit=False)
             item.create_bt = request.user
             item.save()
+            form.save_m2m()
 
             return redirect('item:detail', pk=item.id)
     else:
